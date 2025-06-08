@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bandung Speak Slot Game 🎰</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
+      color: #00ffcc;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #00ccaa;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>Bandung Speak Slot Game 🎰</h2>
+  <p id="balance">Balance: 0 Coins</p>
+  <button onclick="addCoins()">Add 100 Coins</button>
+  <button onclick="spin()">Spin (10 Coins)</button>
+  <button onclick="buyBonus()">Buy Bonus Spin (50 Coins)</button>
+  <p id="result"></p>
+
+  <script>
+    let balance = 0;
+
+    function updateDisplay(message = '') {
+      document.getElementById("balance").innerText = `Balance: ${balance} Coins`;
+      document.getElementById("result").innerText = message;
+    }
+
+    function addCoins() {
+      balance += 100;
+      updateDisplay("Added 100 Coins.");
+    }
+
+    function spin() {
+      if (balance < 10) return updateDisplay("Not enough coins to spin!");
+      balance -= 10;
+      let win = Math.random() < 0.2 ? 50 : 0;
+      balance += win;
+      updateDisplay(win > 0 ? `You win ${win} Coins!` : "Try again!");
+    }
+
+    function buyBonus() {
+      if (balance < 50) return updateDisplay("Not enough coins to buy bonus!");
+      balance -= 50;
+      bonusSpin();
+    }
+
+    function bonusSpin() {
+      let win = Math.random() < 0.99 ? 200 : 0;
+      balance += win;
+      updateDisplay(win > 0 ? `🎉 BONUS WIN: ${win} Coins!` : "😢 You missed the bonus!");
+    }
+  </script>
+</body>
+</html>
